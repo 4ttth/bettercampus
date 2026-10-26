@@ -1,0 +1,14 @@
+// ==UserScript==
+// @name         BetterCampus
+// @namespace    __HOMEPAGE__
+// @version      __VERSION__
+// @description  __DESCRIPTION__
+// @homepageURL  __HOMEPAGE__
+// @supportURL   __REPO__/issues
+// @updateURL    __HOMEPAGE__bettercampus.meta.js
+// @downloadURL  __HOMEPAGE__bettercampus.user.js
+// @match        https://hau.campus-erp.com/*
+// @run-at       document-start
+// @grant        none
+// @noframes
+// ==/UserScript==

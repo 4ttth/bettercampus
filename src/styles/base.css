@@ -1,0 +1,173 @@
+/* Design tokens + resets shared by every redesigned page. */
+
+:root {
+  --bc-maroon: #7a1424;
+  --bc-maroon-deep: #4f0b16;
+  --bc-maroon-tint: #f7eced;
+  --bc-gold: #d9a441;
+
+  --bc-primary-container: #f6dadd;
+  --bc-on-primary-container: #4f0b16;
+  --bc-success: #1d6b3a;
+  --bc-success-bg: #e3f3e8;
+  --bc-warning: #8a5300;
+  --bc-warning-bg: #fdf0d9;
+
+  --bc-bg: #f6f4f2;
+  --bc-surface: #ffffff;
+  --bc-surface-2: #f1edec;
+  --bc-text: #1d1a1b;
+  --bc-muted: #6b6466;
+  --bc-border: #ddd6d7;
+  --bc-focus: #b0283c;
+  --bc-danger: #b42318;
+  --bc-danger-bg: #fdecea;
+
+  --bc-radius: 12px;
+  --bc-radius-sm: 8px;
+  --bc-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 8px 24px rgb(0 0 0 / 0.08);
+  --bc-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bc-tap: 48px; /* minimum touch target */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bc-maroon-tint: #2c1519;
+    --bc-primary-container: #5c1a25;
+    --bc-on-primary-container: #ffd9dd;
+    --bc-success: #8fd6a6;
+    --bc-success-bg: #163222;
+    --bc-warning: #f2c27a;
+    --bc-warning-bg: #3a2a10;
+    --bc-bg: #151213;
+    --bc-surface: #1f1b1c;
+    --bc-surface-2: #2a2526;
+    --bc-text: #f2eeee;
+    --bc-muted: #a99fa1;
+    --bc-border: #3a3234;
+    --bc-focus: #e0596c;
+    --bc-danger: #ff8a80;
+    --bc-danger-bg: #3a1714;
+    --bc-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.4);
+  }
+}
+
+html.bc-cloak body { visibility: hidden !important; }
+
+#bc-root,
+#bc-root * { box-sizing: border-box; }
+
+#bc-root {
+  font-family: var(--bc-font);
+  font-size: 16px; /* 16px+ stops iOS Safari from zooming into inputs */
+  line-height: 1.5;
+  color: var(--bc-text);
+  -webkit-text-size-adjust: 100%;
+}
+
+#bc-root .bc-muted { color: var(--bc-muted); margin: 0; }
+
+/* Buttons */
+#bc-root .bc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--bc-tap);
+  padding: 0 20px;
+  border: 0;
+  border-radius: var(--bc-radius-sm);
+  font: 600 16px/1 var(--bc-font);
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.05s;
+}
+#bc-root .bc-btn:active { transform: translateY(1px); }
+#bc-root .bc-btn--primary { background: var(--bc-maroon); color: #fff; }
+#bc-root .bc-btn--primary:hover { background: var(--bc-maroon-deep); }
+#bc-root .bc-btn.is-loading { pointer-events: none; opacity: 0.85; }
+#bc-root .bc-btn.is-loading::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgb(255 255 255 / 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: bc-spin 0.7s linear infinite;
+}
+@keyframes bc-spin { to { transform: rotate(360deg); } }
+
+#bc-root .bc-link {
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  font: 500 14px var(--bc-font);
+  color: var(--bc-maroon);
+  text-decoration: none;
+  cursor: pointer;
+}
+#bc-root .bc-link:hover { text-decoration: underline; }
+#bc-root .bc-link--quiet { color: var(--bc-muted); }
+@media (prefers-color-scheme: dark) {
+  #bc-root .bc-link { color: #f08a99; }
+  #bc-root .bc-link--quiet { color: var(--bc-muted); }
+}
+
+/* Form controls */
+#bc-root .bc-field { display: block; margin: 16px 0 6px; }
+#bc-root .bc-field__label { font-size: 14px; font-weight: 600; }
+
+#bc-root input[type="text"],
+#bc-root input[type="password"],
+#bc-root input[type="email"],
+#bc-root select {
+  display: block;
+  width: 100%;
+  min-height: var(--bc-tap);
+  padding: 10px 14px;
+  border: 1px solid var(--bc-border);
+  border-radius: var(--bc-radius-sm);
+  background: var(--bc-surface);
+  color: var(--bc-text);
+  font: 16px var(--bc-font);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+#bc-root input::placeholder { color: var(--bc-muted); opacity: 0.8; }
+
+#bc-root :focus-visible,
+#bc-root input:focus {
+  outline: 2px solid var(--bc-focus);
+  outline-offset: 2px;
+}
+
+#bc-root .bc-alert {
+  margin: 16px 0 0;
+  padding: 10px 14px;
+  border-radius: var(--bc-radius-sm);
+  background: var(--bc-danger-bg);
+  color: var(--bc-danger);
+  font-size: 14px;
+}
+#bc-root .bc-alert[hidden] { display: none; }
+
+/* Shown on the classic portal to turn the redesign back on. */
+.bc-reenable {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 2147483647;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--bc-maroon);
+  color: #fff;
+  font: 600 14px var(--bc-font);
+  box-shadow: var(--bc-shadow);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #bc-root * { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>BetterCampus</title>
+  <meta name="description" content="__DESCRIPTION__">
+  <meta name="theme-color" content="#7a1424">
+  <style>
+    :root {
+      --maroon: #7a1424;
+      --maroon-deep: #4f0b16;
+      --tint: #f6dadd;
+      --on-tint: #4f0b16;
+      --gold: #d9a441;
+      --bg: #f6f4f2;
+      --surface: #ffffff;
+      --surface-2: #f1edec;
+      --text: #1d1a1b;
+      --muted: #6b6466;
+      --border: #ddd6d7;
+      --focus: #b0283c;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --tint: #5c1a25;
+        --on-tint: #ffd9dd;
+        --bg: #151213;
+        --surface: #1f1b1c;
+        --surface-2: #2a2526;
+        --text: #f2eeee;
+        --muted: #a99fa1;
+        --border: #3a3234;
+        --focus: #e0596c;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 var(--font);
+    }
+    a { color: var(--maroon); }
+    @media (prefers-color-scheme: dark) { a { color: #f08a99; } }
+    :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+    header.hero {
+      padding: calc(20px + env(safe-area-inset-top)) 0 56px;
+      background: linear-gradient(160deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+      color: #fff;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+    .mark {
+      display: grid; place-items: center;
+      width: 40px; height: 40px; border-radius: 12px;
+      background: #fff; color: var(--maroon);
+      font-size: 14px; letter-spacing: 0.04em;
+    }
+    .pill {
+      margin-left: auto;
+      padding: 4px 12px; border-radius: 999px;
+      border: 1px solid rgb(255 255 255 / 0.4);
+      font-size: 13px; font-weight: 600;
+    }
+    .hero h1 { margin: 48px 0 12px; font-size: clamp(30px, 7vw, 44px); line-height: 1.15; letter-spacing: -0.01em; }
+    .hero p { margin: 0; max-width: 560px; font-size: 18px; color: rgb(255 255 255 / 0.88); }
+    .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 52px; padding: 0 24px; border-radius: 12px;
+      font-weight: 700; text-decoration: none;
+    }
+    .btn-light { background: #fff; color: var(--maroon) !important; }
+    .btn-ghost { color: #fff !important; border: 1px solid rgb(255 255 255 / 0.5); }
+    .version { font-size: 14px; color: rgb(255 255 255 / 0.75); }
+
+    main { padding: 8px 0 48px; }
+    section { margin-top: 40px; }
+    h2 { margin: 0 0 16px; font-size: 24px; line-height: 1.25; }
+
+    .card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+    }
+    main > .wrap > .card:first-child { margin-top: -32px; }
+
+    .tabs { display: flex; gap: 4px; margin: 0 0 20px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+    .tab {
+      flex: none; min-height: 48px; padding: 0 16px;
+      border: 0; border-bottom: 3px solid transparent; background: none;
+      color: var(--muted); font: 600 15px var(--font); cursor: pointer;
+    }
+    .tab[aria-selected="true"] { color: var(--maroon); border-bottom-color: var(--maroon); }
+    @media (prefers-color-scheme: dark) { .tab[aria-selected="true"] { color: #f08a99; border-bottom-color: #f08a99; } }
+    .panel[hidden] { display: none; }
+
+    ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; }
+    ol.steps > li {
+      position: relative;
+      padding: 0 0 20px 48px;
+      counter-increment: step;
+    }
+    ol.steps > li:last-child { padding-bottom: 0; }
+    ol.steps > li::before {
+      content: counter(step);
+      position: absolute; left: 0; top: -2px;
+      display: grid; place-items: center;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--tint); color: var(--on-tint);
+      font-weight: 700; font-size: 15px;
+    }
+    .steps strong { font-weight: 700; }
+    .note { margin: 16px 0 0; padding: 12px 16px; border-radius: 12px; background: var(--surface-2); font-size: 15px; color: var(--muted); }
+    .inline-btn {
+      display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px;
+      padding: 0 18px; border-radius: 10px;
+      background: var(--maroon); color: #fff !important; font-weight: 700; text-decoration: none;
+    }
+
+    .features { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+    @media (min-width: 640px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .features h3 { margin: 0 0 4px; font-size: 17px; }
+    .features p { margin: 0; color: var(--muted); }
+
+    dl.facts { margin: 0; display: grid; gap: 20px; }
+    dl.facts dt { font-weight: 700; }
+    dl.facts dd { margin: 4px 0 0; color: var(--muted); }
+    code { padding: 2px 6px; border-radius: 6px; background: var(--surface-2); font-size: 0.92em; }
+
+    footer { padding: 24px 0 calc(32px + env(safe-area-inset-bottom)); border-top: 1px solid var(--border); font-size: 14px; color: var(--muted); }
+    footer p { margin: 0 0 8px; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">BC</span>
+        <span>BetterCampus</span>
+        <span class="pill">Unofficial</span>
+      </div>
+      <h1>A clearer HAU student portal, on your phone and laptop.</h1>
+      <p>BetterCampus redesigns the Campus++ portal right in your browser. Same login, same data, same backend — just navigation that makes sense.</p>
+      <div class="cta">
+        <a class="btn btn-light" href="bettercampus.user.js">Install BetterCampus</a>
+        <a class="btn btn-ghost" href="#install">How to install</a>
+        <span class="version">Version __VERSION__</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="card" id="install">
+        <h2>Install in 3 steps</h2>
+        <div class="tabs" role="tablist" aria-label="Your device">
+          <button class="tab" role="tab" id="tab-desktop" aria-controls="panel-desktop" aria-selected="true">Laptop / desktop</button>
+          <button class="tab" role="tab" id="tab-android" aria-controls="panel-android" aria-selected="false" tabindex="-1">Android</button>
+          <button class="tab" role="tab" id="tab-ios" aria-controls="panel-ios" aria-selected="false" tabindex="-1">iPhone / iPad</button>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-desktop" aria-labelledby="tab-desktop">
+          <ol class="steps">
+            <li>Install <strong>Tampermonkey</strong> for your browser (Chrome, Edge, Firefox, Safari or Brave) from <a href="https://www.tampermonkey.net/" rel="noopener">tampermonkey.net</a>.</li>
+            <li>Come back here and press <strong>Install BetterCampus</strong>. Tampermonkey opens a page for it — press <strong>Install</strong> there.<br>
+              <a class="inline-btn" href="bettercampus.user.js">Install BetterCampus</a></li>
+            <li>Open <a href="https://hau.campus-erp.com/Student/Login.php" rel="noopener">the HAU portal</a> and sign in as usual.</li>
+          </ol>
+          <p class="note">On Chrome or Edge, Tampermonkey may ask you to switch on <strong>Allow User Scripts</strong> (or Developer mode) for it the first time. It shows a link to the exact setting.</p>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-android" aria-labelledby="tab-android" hidden>
+          <ol class="steps">
+            <li>Install <a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox" rel="noopener"><strong>Firefox</strong></a> from the Play Store. Chrome for Android can’t run add-ons.</li>
+            <li>In Firefox, add <a href="https://addons.mozilla.org/firefox/addon/tampermonkey/" rel="noopener"><strong>Tampermonkey</strong></a>, then open this page in Firefox and tap <strong>Install BetterCampus</strong> → <strong>Install</strong>.<br>
+              <a class="inline-btn" href="bettercampus.user.js">Install BetterCampus</a></li>
+            <li>Open <a href="https://hau.campus-erp.com/Student/Login.php" rel="noopener">the HAU portal</a> in Firefox and sign in.</li>
+          </ol>
+        </div>
+
+        <div class="panel" role="tabpanel" id="panel-ios" aria-labelledby="tab-ios" hidden>
+          <ol class="steps">
+            <li>Install the free <a href="https://apps.apple.com/app/userscripts/id1463298887" rel="noopener"><strong>Userscripts</strong></a> app, open it once, and follow its setup.</li>
+            <li>Go to <strong>Settings → Apps → Safari → Extensions → Userscripts</strong>, turn it on, and allow it on <strong>hau.campus-erp.com</strong> (or all websites).</li>
+            <li>Open this page in <strong>Safari</strong>, tap <strong>Install BetterCampus</strong>, then tap the Userscripts icon in the address bar and choose <strong>Install</strong>.<br>
+              <a class="inline-btn" href="bettercampus.user.js">Install BetterCampus</a></li>
+          </ol>
+          <p class="note">After that, just open <a href="https://hau.campus-erp.com/Student/Login.php" rel="noopener">the HAU portal</a> in Safari and sign in.</p>
+        </div>
+      </div>
+
+      <section aria-labelledby="what">
+        <h2 id="what">What changes</h2>
+        <div class="features">
+          <div class="card">
+            <h3>Four clear sections</h3>
+            <p>Home, Academics, Finances and Me — instead of eight menus with duplicates like “Utilities” and “Account” both changing your password.</p>
+          </div>
+          <div class="card">
+            <h3>Home that answers you</h3>
+            <p>Your next class, balance, latest grades and school notices on one screen.</p>
+          </div>
+          <div class="card">
+            <h3>Built for phones too</h3>
+            <p>Bottom navigation on phones, a side rail on laptops, big tap targets, and dark mode.</p>
+          </div>
+          <div class="card">
+            <h3>Nothing new to learn</h3>
+            <p>Payments, enrollment and evaluations still use the portal’s own forms — just in the new layout.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="know">
+        <h2 id="know">Good to know</h2>
+        <div class="card">
+          <dl class="facts">
+            <div>
+              <dt>It’s unofficial</dt>
+              <dd>BetterCampus is a student project. It is not made, endorsed or supported by Holy Angel University. For portal problems, contact the university as usual.</dd>
+            </div>
+            <div>
+              <dt>Your data stays on your device</dt>
+              <dd>It only runs on <code>hau.campus-erp.com</code>, never sees your password, and sends nothing anywhere. It reads the same portal pages you already can, and only to display them.</dd>
+            </div>
+            <div>
+              <dt>One login at a time</dt>
+              <dd>The portal itself signs you out elsewhere when you log in on another device. If that happens, BetterCampus shows a “Session ended” screen — just sign in again.</dd>
+            </div>
+            <div>
+              <dt>Turning it off</dt>
+              <dd>Use <strong>Me → Switch to classic portal</strong>, or <strong>Classic view</strong> on the login page. To remove it, delete BetterCampus in Tampermonkey or Userscripts.</dd>
+            </div>
+            <div>
+              <dt>Updates are automatic</dt>
+              <dd>Tampermonkey and Userscripts check this site for new versions, so you don’t need to reinstall.</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>BetterCampus is not affiliated with Holy Angel University or the makers of Campus++. Names and logos belong to their owners.</p>
+      <p><a href="__REPO__">Source code on GitHub</a> · <a href="__REPO__/issues">Report a problem</a></p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+      function select(tab, focus) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        });
+        if (focus) tab.focus();
+      }
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { select(t); });
+        t.addEventListener('keydown', function (e) {
+          var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+          if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+        });
+      });
+      // Show the visitor's own platform first.
+      var ua = navigator.userAgent;
+      var ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (ios) select(document.getElementById('tab-ios'));
+      else if (/Android/.test(ua)) select(document.getElementById('tab-android'));
+    })();
+  </script>
+</body>
+</html>

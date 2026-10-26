@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "BetterCampus",
+  "description": "__DESCRIPTION__",
+  "version": "__VERSION__",
+  "homepage_url": "__HOMEPAGE__",
+  "content_scripts": [
+    {
+      "matches": ["https://hau.campus-erp.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bettercampus@local"
+    }
+  }
+}

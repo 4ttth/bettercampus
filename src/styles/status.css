@@ -1,0 +1,44 @@
+/* Full-screen status: session ended / portal error (ShowError.php and in-app). */
+
+html.bc-status-page,
+html.bc-status-page body {
+  margin: 0;
+  background: var(--bc-bg);
+}
+html.bc-status-page body > *:not(#bc-root) { display: none !important; }
+
+#bc-root .bc-status {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 24px 16px;
+  background: var(--bc-bg);
+}
+#bc-root.bc-shell > .bc-status {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgb(0 0 0 / 0.5);
+}
+#bc-root .bc-status__card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 28px;
+  border-radius: 20px;
+  background: var(--bc-surface);
+  box-shadow: var(--bc-shadow);
+  text-align: center;
+}
+#bc-root .bc-status__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--bc-primary-container);
+  color: var(--bc-on-primary-container);
+}
+#bc-root .bc-status__title { margin: 16px 0 8px; font-size: 22px; font-weight: 700; }
+#bc-root .bc-status__body { margin: 0 0 24px; color: var(--bc-muted); }
+#bc-root .bc-status .bc-btn { width: 100%; }

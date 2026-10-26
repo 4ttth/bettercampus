@@ -1,0 +1,54 @@
+/* Portal pages shown inside the shell. The portal's own stylesheets stay on (they lay
+   out its forms), so these rules only undo its page chrome and make content fit. */
+
+html.bc-skin #bc-root .bc-main--portal #MainContent {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  max-width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: none !important;
+  color: var(--bc-text);
+  font-family: var(--bc-font);
+}
+
+/* One typeface everywhere; the portal's own font rules would otherwise reach the shell too. */
+html.bc-skin #bc-root,
+html.bc-skin #bc-root * {
+  font-family: var(--bc-font) !important;
+}
+
+html.bc-skin #bc-root #MainContent table { max-width: 100%; border-color: var(--bc-border); }
+html.bc-skin #bc-root #MainContent td,
+html.bc-skin #bc-root #MainContent th { font-size: 14px; }
+
+html.bc-skin #bc-root #MainContent input[type="button"],
+html.bc-skin #bc-root #MainContent input[type="submit"],
+html.bc-skin #bc-root #MainContent input[type="reset"],
+html.bc-skin #bc-root #MainContent button {
+  min-height: 44px;
+  margin: 4px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--bc-radius-sm);
+  background: var(--bc-maroon);
+  color: #fff;
+  font: 600 15px var(--bc-font);
+  cursor: pointer;
+}
+html.bc-skin #bc-root #MainContent input[type="reset"] {
+  background: var(--bc-primary-container);
+  color: var(--bc-on-primary-container);
+}
+
+html.bc-skin #bc-root #MainContent input[type="text"],
+html.bc-skin #bc-root #MainContent input[type="password"],
+html.bc-skin #bc-root #MainContent select {
+  max-width: 420px;
+}
+
+/* The portal's privacy banner/modal is reachable from Me → Privacy notice instead. */
+html.bc-skin #privacyModal { display: none !important; }
